@@ -9,9 +9,11 @@ export function Card({
   text,
   onDragStart,
   onDragEnd,
+  onDeleteClick,
 }: { text?: string
   onDragStart?(): void
   onDragEnd?(): void
+  onDeleteClick?(): void
 }) {
   const [drag, setDrag] = useState(false)
 
@@ -39,7 +41,7 @@ export function Card({
         ),
       )}
 
-      <DeleteButton />
+      <DeleteButton onClick={onDeleteClick} />
     </Container>
   )
 }
