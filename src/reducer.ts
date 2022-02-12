@@ -63,11 +63,14 @@ export type Action =
   | {
       type: 'Dialog.CancelDelete'
     }
-    | {
+  | {
       type: 'Card.StartDragging'
       payload: {
         cardID: CardID
       }
+    }
+  | {
+      type: 'Card.EndDragging'
     }
   | {
       type: 'Card.Drop'
@@ -157,6 +160,11 @@ export const reducer: Reducer<
         const { cardID } = action.payload
 
         draft.draggingCardID = cardID
+        return
+      }
+
+      case 'Card.EndDragging': {
+        draft.draggingCardID = undefined
         return
       }
 
