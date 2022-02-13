@@ -11,9 +11,6 @@ export function Column({
   id: columnID,
   title,
   cards: rawCards,
-  text,
-  onTextChange,
-  onTextConfirm,
   onTextCancel,
 }: {
   id: ColumnID
@@ -22,9 +19,6 @@ export function Column({
     id: CardID
     text?: string
   }[]
-  text?: string
-  onTextChange?(value: string): void
-  onTextConfirm?(): void
   onTextCancel?(): void
 }) {
   const filterValue = useSelector(state => state.filterValue.trim())
@@ -37,9 +31,6 @@ export function Column({
 
   const [inputMode, setInputMode] = useState(false)
   const toggleInput = () => setInputMode(v => !v)
-  const confirmInput = () => {
-    onTextConfirm?.()
-  }
   const cancelInput = () => {
     setInputMode(false)
     onTextCancel?.()
@@ -58,9 +49,7 @@ export function Column({
 
       {inputMode && (
         <InputForm
-          value={text}
-          onChange={onTextChange}
-          onConfirm={confirmInput}
+          columnID={columnID}
           onCancel={cancelInput}
         />
       )}
